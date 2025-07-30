@@ -4,7 +4,7 @@ Segment customer based on purchasing behavior
 # Streamlit App
 https://customersegmentatione-commerce-amjqnfabzeuumzntsezvyp.streamlit.app/
 
-# โครงสร้างโปรเจกต์ (Project Structure)
+# Project Structure
 ```plaintext
 📁 customer_segmentation_app/
 │
