@@ -1,10 +1,10 @@
-# Customer_Segmentation_E-Commerce
+# 🛍️ Customer_Segmentation_E-Commerce
 Segment customer based on purchasing behavior
 
-# Streamlit App
+# 🔗 Streamlit App
 https://customersegmentatione-commerce-amjqnfabzeuumzntsezvyp.streamlit.app/
 
-# Project Structure
+# 📁 Project Structure
 ```plaintext
 📁 customer_segmentation_app/
 │
@@ -18,7 +18,7 @@ https://customersegmentatione-commerce-amjqnfabzeuumzntsezvyp.streamlit.app/
 ├── 📄 requirements.txt        # Python dependencies
 └── 📄 README.md               # Project description
 ```
-# Dataset
+# 📁 Dataset
 ```plaintext
 This is a transactional data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail.
 The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers.
