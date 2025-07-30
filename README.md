@@ -12,7 +12,6 @@ Segment customer based on purchasing behavior
 │   ├── eda.py                # ฟังก์ชันสำหรับ EDA
 │   ├── clustering.py         # ฟังก์ชันสำหรับ Clustering
 │   └── visualization.py      # ฟังก์ชันสำหรับการสร้างกราฟ
-├── 📁 assets/                 # รูปภาพ โลโก้ หรือไฟล์ static
 ├── 📄 requirements.txt        # รายการไลบรารีที่ใช้
 └── 📄 README.md               # คำอธิบายโปรเจกต์              
 ```
