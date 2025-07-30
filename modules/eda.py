@@ -1,0 +1,64 @@
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import plotly.figure_factory as ff
+
+from sklearn.preprocessing import LabelEncoder
+
+def run(df):
+    st.subheader("📊 Exploratory Data Analysis (EDA)")
+
+    # Filter out cancelled or adjusted invoices
+    df = df[~df['InvoiceNo'].astype(str).str.startswith(('C', 'A'))]
+
+    # Display basic info
+    st.write("### Sample Data")
+    st.dataframe(df.head())
+
+    st.write("### Summary Statistics")
+    stat_df = df[["Quantity", "UnitPrice", "TotalPrice"]].describe().style.format("{:.2f}")
+    st.dataframe(stat_df, use_container_width=True)
+
+    # Top 10 selling products (Quantity)
+    st.write("### 🏆 Top 10 Selling Products (Quantity)")
+    top_products_qty = df.groupby("Description")["Quantity"].sum().sort_values(ascending=False).head(10).reset_index()
+    fig_top_products_qty = px.bar(top_products_qty, x='Description', y='Quantity', title="Top 10 Selling Products",width=1400, height=600)
+    fig_top_products_qty.update_layout(
+        xaxis_tickangle=-90,
+        )
+    st.plotly_chart(fig_top_products_qty)
+
+    # Top 10 selling products (Total Price)
+    st.write("### 🏆 Top 10 Selling Products (Total Price)")
+    top_products_tprice = df.groupby("Description")["TotalPrice"].sum().sort_values(ascending=False).head(10).reset_index()
+    fig_top_products_tprice = px.bar(top_products_tprice, x='Description', y='TotalPrice', title="Top 10 Selling Products",width=1400, height=600)
+    fig_top_products_tprice.update_layout(
+        xaxis_tickangle=-90,
+        )
+    st.plotly_chart(fig_top_products_tprice)
+ 
+    # Sales by Country
+    st.write("### 🌍 Sales by Country (Top 10)")
+    df['TotalPrice'] = df['Quantity'] * df['UnitPrice']
+    country_sales = df.groupby("Country")["TotalPrice"].sum().sort_values(ascending=False).head(10).reset_index()
+    fig_country_sales = px.bar(country_sales, x='Country', y='TotalPrice', title="Top 10 Countries by Sales")
+    st.plotly_chart(fig_country_sales)
+
+    # Correlation heatmap
+    df_encoded = df.copy()
+    label_encoders = {}
+    for column in df_encoded.columns:
+        if df_encoded[column].dtype == 'object':
+            le = LabelEncoder()
+            df_encoded[column] = le.fit_transform(df_encoded[column])
+            label_encoders[column] = le
+
+    corr_matrix = df_encoded.corr().round(2)
+    z = corr_matrix.values
+    x = corr_matrix.columns.tolist()
+    y = corr_matrix.index.tolist()
+    fig_heatmap = ff.create_annotated_heatmap(z, x=x, y=y, colorscale='Viridis', showscale=True)
+    st.plotly_chart(fig_heatmap)
+
+
+    
