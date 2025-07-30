@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import gdown
+import os
 from modules import eda, clustering, visualization
 
 st.set_page_config(page_title="Customer Segmentation App", layout="wide")
