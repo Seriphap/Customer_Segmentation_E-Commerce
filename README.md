@@ -5,13 +5,14 @@ Segment customer based on purchasing behavior
 ```plaintext
 📁 customer_segmentation_app/
 │
-├── 📄 app.py                  # ไฟล์หลักของ Streamlit app
-├── 📁 data/                   # โฟลเดอร์เก็บไฟล์ข้อมูล (CSV, Excel ฯลฯ)
+├── 📄 app.py                 # Main Streamlit app
+├── 📁 data/                  # Folder for uploade data
 │   └── customers.csv
-├── 📁 modules/                # โมดูลแยกฟังก์ชันต่าง ๆ
-│   ├── eda.py                # ฟังก์ชันสำหรับ EDA
-│   ├── clustering.py         # ฟังก์ชันสำหรับ Clustering
-│   └── visualization.py      # ฟังก์ชันสำหรับการสร้างกราฟ
-├── 📄 requirements.txt        # รายการไลบรารีที่ใช้
-└── 📄 README.md               # คำอธิบายโปรเจกต์              
+├── 📁 modules/               # Python modules for logic separation
+│   ├── eda.py                
+│   ├── clustering.py         
+│   └── visualization.py      
+├── 📄 requirements.txt        # Python dependencies
+└── 📄 README.md               # Project description
+
 ```
