@@ -6,5 +6,5 @@ seaborn
 scikit-learn
 plotly
 gdown
-google-genai
+google-generativeai
 requests
