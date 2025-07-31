@@ -1,4 +1,4 @@
-# 🛍️ Customer_Segmentation_E-Commerce
+# 🛍️ Customer Segmentation for E-Commerce
 Segment customer based on purchasing behavior
 
 # 🔗 Streamlit App
@@ -15,7 +15,7 @@ https://customersegmentatione-commerce-amjqnfabzeuumzntsezvyp.streamlit.app/
 │   ├── eda.py                
 │   ├── clustering.py         
 │   └── visualization.py      
-├── 📄 requirements.txt        # Python dependencies
+├── 📄 requirements.txt        # Required libraries
 └── 📄 README.md               # Project description
 ```
 # 📁 Dataset
