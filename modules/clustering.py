@@ -46,7 +46,7 @@ def run(df):
     GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
     # Initialize Gemini client
     genai.configure(api_key=GEMINI_API_KEY)
-    gemini_model = genai.GenerativeModel("gemini-2.5-flash")
+    gemini_model = genai.GenerativeModel("gemini-2.5-pro")
 
     # Create prompt
 
