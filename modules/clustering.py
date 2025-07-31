@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 from sklearn.metrics import silhouette_score
 import json
 import requests
-import google as genai
+import google.generativeai as genai
 
 def run(df):
     st.subheader("Customer Segmentation using K-Means")
