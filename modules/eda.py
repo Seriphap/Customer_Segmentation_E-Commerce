@@ -45,6 +45,7 @@ def run(df):
     st.plotly_chart(fig_country_sales)
 
     # Correlation heatmap
+    st.write("### 🔍 Correlation heatmap")
     df_encoded = df.copy()
     label_encoders = {}
     for column in df_encoded.columns:
