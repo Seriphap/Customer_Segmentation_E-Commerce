@@ -51,7 +51,7 @@ def run(df):
     # Create prompt
 
     prompt = f"""
-    You are a marketing analyst. Below is a customer segmentation summary from a K-Means clustering model using RFM (Recency, Frequency, Monetary) data.
+    You are a marketing analyst. the Dat is a customer segmentation summary from a K-Means clustering model using RFM (Recency, Frequency, Monetary).
     
     Each row represents a cluster of customers with average values for Recency, Frequency, and Monetary, along with the number of customers in that cluster.
     
@@ -60,8 +60,6 @@ def run(df):
     Data:
     {rfm_json}
     """
-
-
 
     # Send request to Gemini
     response = model.generate_content(prompt.strip())
