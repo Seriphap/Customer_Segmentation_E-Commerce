@@ -39,7 +39,7 @@ This allows for the sharing and adaptation of the datasets for any purpose, prov
 ```plaintext
 1. RFM (Recency, Frequency, Monetary) analysis
 2. K-Means clustering with adjustable number of clusters (K)
-3. Cluster summary table with customer count
+3. Cluster summary table with customer count, suggest a brief marketing strategy by Gemini AI
 4. Downloadable CSV of all clustered customers
 5. Elbow Method and Silhouette Score visualizations for optimal K selection
 ```
