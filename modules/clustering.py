@@ -46,7 +46,7 @@ def run(df):
     GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
     # Initialize Gemini client
     genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    gemini_model = genai.GenerativeModel("gemini-2.0-flash")
 
     # Create prompt
 
@@ -62,7 +62,7 @@ def run(df):
     """
 
     # Send request to Gemini
-    response = model.generate_content(prompt.strip())
+    response = gemini_model.generate_content(prompt.strip())
     
     # Display result
     st.subheader("🤖 Gemini Analysis of Clusters")
