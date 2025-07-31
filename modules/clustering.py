@@ -4,7 +4,8 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 import plotly.graph_objects as go
 from sklearn.metrics import silhouette_score
-
+import json
+import requests
 
 def run(df):
     st.subheader("Customer Segmentation using K-Means")
@@ -38,6 +39,38 @@ def run(df):
     # แสดงผลใน Streamlit
     st.dataframe(formatted_df, use_container_width=True)
 
+    # Gemini Analysis--------------------------------------------
+    rfm_json = rfm_summary.reset_index().to_json(orient='records')
+    
+    GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
+    API_KEY = "YOUR_GEMINI_API_KEY"
+    
+    headers = {
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "contents": [{
+            "parts": [{
+                "text": f"Analyze the following customer segmentation cluster summary and explain each cluster in simple terms:\n\n{rfm_json}"
+            }]
+        }]
+    }
+    
+    response = requests.post(f"{GEMINI_API_URL}?key={API_KEY}", headers=headers, json=payload)
+    
+    if response.status_code == 200:
+        gemini_analysis = response.json()['candidates'][0]['content']['parts'][0]['text']
+        st.subheader("Gemini Analysis of Clusters")
+        st.write(gemini_analysis)
+    else:
+        st.error("Failed to get response from Gemini API")
+
+
+
+
+
+    #------------------------------------------------------------
     st.session_state['rfm'] = rfm
     st.session_state['rfm_scaled'] = rfm_scaled
     st.session_state['model'] = model
