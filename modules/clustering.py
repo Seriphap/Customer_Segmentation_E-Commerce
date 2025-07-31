@@ -49,11 +49,20 @@ def run(df):
     model = genai.GenerativeModel("gemini-2.0-flash")
 
     # Create prompt
+
     prompt = f"""
-    Analyze the following customer segmentation cluster summary and explain the meaning and marketing strategy for each cluster:
+    You are a marketing analyst. Below is a customer segmentation summary from a K-Means clustering model using RFM (Recency, Frequency, Monetary) data.
     
+    Each row represents a cluster of customers with average values for Recency, Frequency, and Monetary, along with the number of customers in that cluster.
+    
+    Please:
+    1. Describe the characteristics of each cluster.
+    2. Suggest a marketing strategy for each cluster.
+    
+    Data:
     {rfm_json}
     """
+
     
     # Send request to Gemini
     response = model.generate_content(prompt.strip())
