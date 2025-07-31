@@ -55,13 +55,12 @@ def run(df):
     
     Each row represents a cluster of customers with average values for Recency, Frequency, and Monetary, along with the number of customers in that cluster.
     
-    Please:
-    1. Describe the characteristics of each cluster.
-    2. Suggest a marketing strategy for each cluster.
+    Please summarize each cluster in 1-2 short sentences and suggest a brief marketing strategy. Use bullet points for clarity.
     
     Data:
     {rfm_json}
     """
+
 
     
     # Send request to Gemini
