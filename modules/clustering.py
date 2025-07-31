@@ -65,7 +65,7 @@ def run(df):
     response = model.generate_content(prompt.strip())
     
     # Display result
-    st.subheader("Gemini Analysis of Clusters")
+    st.subheader("🤖 Gemini Analysis of Clusters")
     st.write(response.text)
 
     #------------------------------------------------------------
