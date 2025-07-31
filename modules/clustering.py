@@ -62,7 +62,7 @@ def run(df):
     """
 
 
-    
+
     # Send request to Gemini
     response = model.generate_content(prompt.strip())
     
