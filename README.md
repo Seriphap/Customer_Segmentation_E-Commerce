@@ -33,7 +33,7 @@ This allows for the sharing and adaptation of the datasets for any purpose, prov
 1. Summary statistics of key metrics (Quantity, Unit Price, Total Price)
 2. Top 10 products by quantity and revenue
 3. Sales by country
-4. Correlation heatmap of numerical features
+4. Correlation heatmap of features
 ```
 ## 2. Customer Segmentation
 ```plaintext
