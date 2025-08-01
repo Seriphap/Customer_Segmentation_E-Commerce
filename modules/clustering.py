@@ -44,12 +44,10 @@ def run(df):
     rfm_json = rfm_summary.reset_index().to_json(orient='records')
 
     GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
-    # Initialize Gemini client
     genai.configure(api_key=GEMINI_API_KEY)
     gemini_model = genai.GenerativeModel("gemini-2.5-pro")
 
     # Create prompt
-
     prompt = f"""
     You are a marketing analyst. the Dat is a customer segmentation summary from a K-Means clustering model using RFM (Recency, Frequency, Monetary).
     
