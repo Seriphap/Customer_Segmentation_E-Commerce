@@ -35,8 +35,6 @@ def load_data(uploaded_file=None):
 uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
 df = load_data(uploaded_file)
 
-df = load_data()
-
 menu = st.sidebar.radio("Select Section", ["EDA", "Clustering", "Visualization"])
 
 if menu == "EDA":
@@ -45,5 +43,6 @@ elif menu == "Clustering":
     clustering.run(df)
 elif menu == "Visualization":
     visualization.run(df)
+
 
 
