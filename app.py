@@ -32,7 +32,7 @@ def load_data(uploaded_file=None):
     df['TotalPrice'] = df['Quantity'] * df['UnitPrice']
     return df
 # UI สำหรับอัปโหลดไฟล์
-uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+uploaded_file = st.file_uploader("Try with your CSV file", type=["csv"])
 df = load_data(uploaded_file)
 
 menu = st.sidebar.radio("Select Section", ["EDA", "Clustering", "Visualization"])
@@ -43,6 +43,7 @@ elif menu == "Clustering":
     clustering.run(df)
 elif menu == "Visualization":
     visualization.run(df)
+
 
 
 
