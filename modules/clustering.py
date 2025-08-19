@@ -20,7 +20,7 @@ def run(df):
     rfm = df.groupby('CustomerID').agg({
         'InvoiceDate': lambda x: (snapshot_date - x.max()).days,
         'InvoiceNo': 'nunique',
-        'TotalPrice': 'sum'
+        'Amount': 'sum'
     })
     rfm.columns = ['Recency', 'Frequency', 'Monetary']
     scaler = StandardScaler()
@@ -138,4 +138,5 @@ def run(df):
 
 
  
+
 
