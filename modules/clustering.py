@@ -39,7 +39,7 @@ def run(df):
     formatted_df = rfm_summary.style.format("{:.2f}")
     # แสดงผลใน Streamlit
     st.dataframe(formatted_df, use_container_width=True)
-
+    '''
     # Gemini Analysis--------------------------------------------
     rfm_json = rfm_summary.reset_index().to_json(orient='records')
 
@@ -67,7 +67,7 @@ def run(df):
     st.write(response.text)
 
     #------------------------------------------------------------
-    
+    '''
     st.session_state['rfm'] = rfm
     st.session_state['rfm_scaled'] = rfm_scaled
     st.session_state['model'] = model
@@ -138,6 +138,7 @@ def run(df):
 
 
  
+
 
 
 
