@@ -60,15 +60,11 @@ def run(df):
     y = corr_matrix.index.tolist()
     
 
-    #fig_heatmap = ff.create_annotated_heatmap(z, x=x, y=y, colorscale='Viridis', showscale=True)
-
-    fig_headmap = ff.create_annotated_heatmap(z,x=x,y=y, colorscale='RdBu', showscale=True, reversescale=True,
-                                               zmin=-1,zmax=1,font_colors=['green'])
-    #fig_headmap.update_layout(title='Correlation Matrix Heatmap',#autosize=True,width=1200,height=800, 
-                              yaxis=dict(autorange='reversed'))
+    fig_heatmap = ff.create_annotated_heatmap(z, x=x, y=y, colorscale='Viridis', showscale=True)
     st.plotly_chart(fig_heatmap)
 
     
+
 
 
 
