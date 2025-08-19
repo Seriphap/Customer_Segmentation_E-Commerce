@@ -29,7 +29,7 @@ def load_data(uploaded_file=None):
     df = df[df['Quantity'].astype(int) >= 0]
     df.columns = df.columns.str.strip()
     df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
-    df['TotalPrice'] = df['Quantity'] * df['UnitPrice']
+    df['Amount'] = df['Quantity'] * df['UnitPrice']
     return df
 # UI สำหรับอัปโหลดไฟล์
 uploaded_file = st.file_uploader("Try using your own CSV file, and make sure the column names and formats match the sample data", type=["csv"])
@@ -43,6 +43,7 @@ elif menu == "Clustering":
     clustering.run(df)
 elif menu == "Visualization":
     visualization.run(df)
+
 
 
 
