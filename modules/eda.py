@@ -60,10 +60,11 @@ def run(df):
     y = corr_matrix.index.tolist()
     
 
-    fig_heatmap = ff.create_annotated_heatmap(z, x=x, y=y, colorscale='Viridis', showscale=True)
+    fig_heatmap = ff.create_annotated_heatmap(z, x=x, y=y, colorscale='RdBu', showscale=True)
     st.plotly_chart(fig_heatmap)
 
     
+
 
 
 
