@@ -16,7 +16,7 @@ def run(df):
     st.dataframe(df.head())
 
     st.write("### Summary Statistics")
-    stat_df = df[["Quantity", "UnitPrice", "TotalPrice"]].describe().style.format("{:.2f}")
+    stat_df = df[["Quantity", "UnitPrice", "Amount"]].describe().style.format("{:.2f}")
     st.dataframe(stat_df, use_container_width=True)
 
     # Top 10 selling products (Quantity)
@@ -28,10 +28,10 @@ def run(df):
         )
     st.plotly_chart(fig_top_products_qty)
 
-    # Top 10 selling products (Total Price)
-    st.write("### 🏆 Top 10 Selling Products (Total Price)")
-    top_products_tprice = df.groupby("Description")["TotalPrice"].sum().sort_values(ascending=False).head(10).reset_index()
-    fig_top_products_tprice = px.bar(top_products_tprice, x='Description', y='TotalPrice', title="Top 10 Selling Products",width=1400, height=600)
+    # Top 10 selling products (Amount)
+    st.write("### 🏆 Top 10 Selling Products (Amount)")
+    top_products_tprice = df.groupby("Description")["Amount"].sum().sort_values(ascending=False).head(10).reset_index()
+    fig_top_products_tprice = px.bar(top_products_tprice, x='Description', y='Amount', title="Top 10 Selling Products",width=1400, height=600)
     fig_top_products_tprice.update_layout(
         xaxis_tickangle=-90,
         )
@@ -39,9 +39,9 @@ def run(df):
  
     # Sales by Country
     st.write("### 🌍 Sales by Country (Top 10)")
-    df['TotalPrice'] = df['Quantity'] * df['UnitPrice']
-    country_sales = df.groupby("Country")["TotalPrice"].sum().sort_values(ascending=False).head(10).reset_index()
-    fig_country_sales = px.bar(country_sales, x='Country', y='TotalPrice', title="Top 10 Countries by Sales")
+    df['Amount'] = df['Quantity'] * df['UnitPrice']
+    country_sales = df.groupby("Country")["Amount"].sum().sort_values(ascending=False).head(10).reset_index()
+    fig_country_sales = px.bar(country_sales, x='Country', y='Amount', title="Top 10 Countries by Sales")
     st.plotly_chart(fig_country_sales)
 
     # Correlation heatmap
@@ -63,3 +63,4 @@ def run(df):
 
 
     
+
