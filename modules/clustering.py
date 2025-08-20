@@ -41,28 +41,28 @@ def run(df):
     st.dataframe(formatted_df, use_container_width=True)
     
     # Gemini Analysis--------------------------------------------
-    rfm_json = rfm_summary.reset_index().to_json(orient='records')
 
-    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
-    genai.configure(api_key=GEMINI_API_KEY)
-    gemini_model = genai.GenerativeModel("gemini-2.0-flash")
-
-    # Create prompt
-    prompt = f"""
-    You are a marketing analyst. the Dat is a customer segmentation summary from a K-Means clustering model using RFM (Recency, Frequency, Monetary).
-    Each row represents a cluster of customers with average values for Recency, Frequency, and Monetary, along with the number of customers in that cluster.
-    Please summarize each cluster in 1-2 short sentences and suggest a brief marketing strategy. Use bullet points for clarity.
+    # ปุ่มสำหรับเรียกใช้งาน Gemini
+    if st.button("🔄 Analyze with Gemini"):
+        rfm_json = rfm_summary.reset_index().to_json(orient='records')
     
-    Data:
-    {rfm_json}
-    """
-
-    # Send request to Gemini
-    response = gemini_model.generate_content(prompt.strip())
+        GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+        genai.configure(api_key=GEMINI_API_KEY)
+        gemini_model = genai.GenerativeModel("gemini-2.0-flash")
     
-    # Display result
-    st.subheader("🤖 Gemini Analysis of Clusters")
-    st.write(response.text)
+        prompt = f"""
+        You are a marketing analyst. The data is a customer segmentation summary from a K-Means clustering model using RFM (Recency, Frequency, Monetary).
+        Each row represents a cluster of customers with average values for Recency, Frequency, and Monetary, along with the number of customers in that cluster.
+        Please summarize each cluster in 1-2 short sentences and suggest a brief marketing strategy. Use bullet points for clarity.
+    
+        Data:
+        {rfm_json}
+        """
+    
+        response = gemini_model.generate_content(prompt.strip())
+        # แสดงผลลัพธ์
+        st.subheader("🤖 Gemini Analysis of Clusters")
+        st.write(response.text)
 
     #------------------------------------------------------------
     
@@ -136,6 +136,7 @@ def run(df):
 
 
  
+
 
 
 
