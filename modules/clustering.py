@@ -44,7 +44,7 @@ def run(df):
     # Gemini Analysis--------------------------------------------
 
     # ปุ่มสำหรับเรียกใช้งาน Gemini
-    if st.button("🔄 Analyze with Gemini"):
+    if st.button("🤖 Analyze with Gemini"):
         rfm_json = rfm_summary.reset_index().to_json(orient='records')
     
         GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
@@ -138,6 +138,7 @@ def run(df):
 
 
  
+
 
 
 
