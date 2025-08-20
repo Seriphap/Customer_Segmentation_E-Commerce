@@ -65,19 +65,19 @@ def run(df: pd.DataFrame):
         [{"Cluster":0,"Recency":43.70,"Frequency":3.68,"Monetary":1359.05,"CustomerCount":3054}, ...]
         """
         return f"""
-คุณเป็นผู้ช่วยด้านการตลาด ช่วยอธิบายผลการจัดกลุ่มลูกค้าจาก RFM (Recency, Frequency, Monetary)
-โดยอิงจากสรุปด้านล่าง (ค่าเฉลี่ยต่อคลัสเตอร์) และเสนอแผนการตลาดแบบสั้น กระชับ
-
-ข้อกำหนด:
-- ตั้งชื่อกลุ่มแบบเข้าใจง่าย (เช่น 'ลูกค้าค่าคงที่สูงและมาซื้อบ่อย', 'เสี่ยงหลุด' ฯลฯ)
-- อธิบายแต่ละคลัสเตอร์ 1-2 ประโยค
-- แนะนำแคมเปญ 2 ข้อต่อคลัสเตอร์ (ช่องทาง + ข้อเสนอ) เป็น bullet point
-- ภาษา: ไทย
-- หมายเหตุ RFM: Recency ยิ่งน้อย = มาซื้อล่าสุด; Frequency ยิ่งมาก = มาซื้อบ่อย; Monetary ยิ่งมาก = มูลค่าซื้อสูง
-
-Cluster summary (JSON):
-{json.dumps(summary_rows, ensure_ascii=False)}
-""".strip()
+        คุณเป็นผู้ช่วยด้านการตลาด ช่วยอธิบายผลการจัดกลุ่มลูกค้าจาก RFM (Recency, Frequency, Monetary)
+        โดยอิงจากสรุปด้านล่าง (ค่าเฉลี่ยต่อคลัสเตอร์) และเสนอแผนการตลาดแบบสั้น กระชับ
+        
+        ข้อกำหนด:
+        - ตั้งชื่อกลุ่มแบบเข้าใจง่าย (เช่น 'ลูกค้าค่าคงที่สูงและมาซื้อบ่อย', 'เสี่ยงหลุด' ฯลฯ)
+        - อธิบายแต่ละคลัสเตอร์ 1-2 ประโยค
+        - แนะนำแคมเปญ 2 ข้อต่อคลัสเตอร์ (ช่องทาง + ข้อเสนอ) เป็น bullet point
+        - ภาษา: ไทย
+        - หมายเหตุ RFM: Recency ยิ่งน้อย = มาซื้อล่าสุด; Frequency ยิ่งมาก = มาซื้อบ่อย; Monetary ยิ่งมาก = มูลค่าซื้อสูง
+        
+        Cluster summary (JSON):
+        {json.dumps(summary_rows, ensure_ascii=False)}
+        """.strip()
 
     @st.cache_data(show_spinner=False, ttl=3600)
     def explain_cached(model_name: str, summary_key: tuple, summary_rows: list):
@@ -140,70 +140,5 @@ Cluster summary (JSON):
         st.subheader("🤖 Gemini Analysis of Clusters")
         st.write(st.session_state["explanation"])
 
-    #------------------------------------------------------------
-    
-    st.session_state['rfm'] = rfm
-    st.session_state['rfm_scaled'] = rfm_scaled
-    st.session_state['model'] = model
-
-    st.subheader("RFM Variable Descriptions")
-    text_explain = {
-            "ตัวแปร (Variable)": ["Recency", "Frequency", "Monetary"],
-            "คำอธิบายภาษาไทย (Thai Description)": [
-                "จำนวนวันนับจากการซื้อครั้งล่าสุด (น้อย = ซื้อเร็ว ๆ นี้)",
-                "จำนวนครั้งที่ซื้อ (มาก = ซื้อบ่อย)",
-                "ยอดใช้จ่ายรวม (มาก = ลูกค้ามูลค่าสูง)"
-            ],
-            "English Description": [
-                "Number of days since the last purchase (lower = more recent)",
-                "Number of purchases (higher = more frequent)",
-                "Total spending amount (higher = more valuable customer)"
-            ]
-        }
-    st.dataframe(pd.DataFrame(text_explain),hide_index=True)
-
-    # ... download buttons for each cluster ...
-    st.subheader("Download All Cluster Data")
-
-    # Reset index to include CustomerID in the CSV
-    all_clusters_csv = rfm.reset_index().to_csv(index=False).encode('utf-8')
-
-    st.download_button(
-        label="Download All Clusters (CSV)",
-        data=all_clusters_csv,
-        file_name='all_clusters_data.csv',
-        mime='text/csv'
-    )
-
-    # Elbow method & Silhouette score
-    sse = []
-    silhouette_scores = []
-    k_range = range(2, 11)
-    for k in k_range:
-        model = KMeans(n_clusters=k, random_state=42)
-        labels = model.fit_predict(rfm_scaled)
-        sse.append(model.inertia_)
-        silhouette_scores.append(silhouette_score(rfm_scaled, labels))
-
-    # Plot Elbow Method using Plotly
-    st.write("### Elbow Method")
-    elbow_fig = go.Figure()
-    elbow_fig.add_trace(go.Scatter(x=list(k_range), y=sse, mode='lines+markers', name='SSE'))
-    elbow_fig.update_layout(title='Elbow Method For Optimal K',
-                            xaxis_title='Number of clusters (K)',
-                            yaxis_title='Sum of Squared Errors (SSE)',
-                            width=1400,
-                            height=600)
-    st.plotly_chart(elbow_fig)
-
-    # Plot Silhouette Score using Plotly
-    st.write("### Silhouette Score")
-    silhouette_fig = go.Figure()
-    silhouette_fig.add_trace(go.Scatter(x=list(k_range), y=silhouette_scores, mode='lines+markers',
-                                        name='Silhouette Score', line=dict(color='green')))
-    silhouette_fig.update_layout(title='Silhouette Score For Optimal K',
-                                 xaxis_title='Number of clusters (K)',
-                                 yaxis_title='Silhouette Score',
-                                width=1400,
                                 height=600)
     st.plotly_chart(silhouette_fig)
