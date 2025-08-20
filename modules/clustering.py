@@ -39,7 +39,7 @@ def run(df):
     formatted_df = rfm_summary.style.format("{:.2f}")
     # แสดงผลใน Streamlit
     st.dataframe(formatted_df, use_container_width=True)
-    '''
+    
     # Gemini Analysis--------------------------------------------
     rfm_json = rfm_summary.reset_index().to_json(orient='records')
 
@@ -50,9 +50,7 @@ def run(df):
     # Create prompt
     prompt = f"""
     You are a marketing analyst. the Dat is a customer segmentation summary from a K-Means clustering model using RFM (Recency, Frequency, Monetary).
-    
     Each row represents a cluster of customers with average values for Recency, Frequency, and Monetary, along with the number of customers in that cluster.
-    
     Please summarize each cluster in 1-2 short sentences and suggest a brief marketing strategy. Use bullet points for clarity.
     
     Data:
@@ -67,7 +65,7 @@ def run(df):
     st.write(response.text)
 
     #------------------------------------------------------------
-    '''
+    
     st.session_state['rfm'] = rfm
     st.session_state['rfm_scaled'] = rfm_scaled
     st.session_state['model'] = model
@@ -138,6 +136,7 @@ def run(df):
 
 
  
+
 
 
 
