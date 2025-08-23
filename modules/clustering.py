@@ -49,7 +49,7 @@ def run(df):
     if st.button("🔄 Analyze with Gemini"):
         GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
         genai.configure(api_key=GEMINI_API_KEY)
-        gemini_model = genai.GenerativeModel("gemini-2.0-flash")
+        gemini_model = genai.GenerativeModel("gemini-2.5-pro")
     
         prompt = f"""
         You are a marketing analyst. The data is a customer segmentation summary from a K-Means clustering model using RFM (Recency, Frequency, Monetary).
@@ -138,6 +138,7 @@ def run(df):
 
 
  
+
 
 
 
