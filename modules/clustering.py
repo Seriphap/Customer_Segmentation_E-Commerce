@@ -11,7 +11,6 @@ from modules.gemini_utils import call_gemini_with_backoff
 
 def run(df):
     st.subheader("Customer Segmentation using K-Means")
-
     df = df[df['Quantity'] > 0]
     df = df[df['UnitPrice'] > 0]
     df = df[~df['InvoiceNo'].astype(str).str.startswith('C')]
@@ -63,8 +62,9 @@ def run(df):
         # response = gemini_model.generate_content(prompt.strip())
         response = call_gemini_with_backoff(gemini_model, prompt.strip())
         # แสดงผลลัพธ์
-        st.subheader("🤖 Gemini Analysis of Clusters")
-        st.write(response.text)
+        if response:  # มี response กลับมา
+            st.subheader("🤖 Gemini Analysis of Clusters")
+            st.write(response.text)
 
     #------------------------------------------------------------
     
@@ -138,6 +138,7 @@ def run(df):
 
 
  
+
 
 
 
