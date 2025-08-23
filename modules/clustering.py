@@ -59,7 +59,7 @@ def run(df):
         Data:
         {rfm_json}
         """
-        # st.session_state.clear()
+        st.session_state.clear()
         # response = gemini_model.generate_content(prompt.strip())
         response = call_gemini_with_backoff(gemini_model, prompt.strip())
         # แสดงผลลัพธ์
@@ -138,6 +138,7 @@ def run(df):
 
 
  
+
 
 
 
