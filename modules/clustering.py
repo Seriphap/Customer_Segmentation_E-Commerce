@@ -59,9 +59,9 @@ def run(df):
         Data:
         {rfm_json}
         """
-        st.session_state.clear()
-        response = gemini_model.generate_content(prompt.strip())
-        # response = call_gemini_with_backoff(gemini_model, prompt.strip())
+        # st.session_state.clear()
+        # response = gemini_model.generate_content(prompt.strip())
+        response = call_gemini_with_backoff(gemini_model, prompt.strip())
         # แสดงผลลัพธ์
         st.subheader("🤖 Gemini Analysis of Clusters")
         st.write(response.text)
@@ -138,6 +138,7 @@ def run(df):
 
 
  
+
 
 
 
