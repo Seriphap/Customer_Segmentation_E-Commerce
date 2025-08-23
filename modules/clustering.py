@@ -42,12 +42,11 @@ def run(df):
     st.dataframe(formatted_df, use_container_width=True)
     
     # Gemini Analysis--------------------------------------------
+    rfm_json = rfm_summary.reset_index().to_json(orient='records')
+    st.markdown(rfm_json)
 
     # ปุ่มสำหรับเรียกใช้งาน Gemini
     if st.button("🔄 Analyze with Gemini"):
-        rfm_json = rfm_summary.reset_index().to_json(orient='records')
-        st.markdown(rfm_json)
-    
         GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
         genai.configure(api_key=GEMINI_API_KEY)
         gemini_model = genai.GenerativeModel("gemini-2.0-flash")
@@ -139,6 +138,7 @@ def run(df):
 
 
  
+
 
 
 
