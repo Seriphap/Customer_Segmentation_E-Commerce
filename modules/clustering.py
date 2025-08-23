@@ -43,7 +43,7 @@ def run(df):
     
     # Gemini Analysis--------------------------------------------
     rfm_json = rfm_summary.reset_index().to_json(orient='records')
-    st.markdown(rfm_json)
+    # st.markdown(rfm_json)
 
     # ปุ่มสำหรับเรียกใช้งาน Gemini
     if st.button("🔄 Analyze with Gemini"):
@@ -138,6 +138,7 @@ def run(df):
 
 
  
+
 
 
 
