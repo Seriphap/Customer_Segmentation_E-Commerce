@@ -52,7 +52,6 @@ def run(df):
         genai.configure(api_key=GEMINI_API_KEY)
         gemini_model = genai.GenerativeModel("gemini-2.5-pro")
         
-        '''
         prompt = f"""
         You are a marketing analyst. The dataset summarizes customer segments derived from a K-Means clustering model based on RFM (Recency, Frequency, Monetary) metrics.
         Each row represents a customer cluster, showing the average values for Recency, Frequency, and Monetary, along with the total number of customers in that cluster.
@@ -64,21 +63,12 @@ def run(df):
         - Present the clusters in order of marketing importance, starting with the most valuable segment.
         
         Data:
-        {rfm_json}
+        {str(rfm_json)}
         """
-        '''
-        prompt = """
-        You are a marketing analyst. The dataset summarizes customer segments derived from a K-Means clustering model based on RFM (Recency, Frequency, Monetary) metrics.
-        Each row represents a customer cluster, showing the average values for Recency, Frequency, and Monetary, along with the total number of customers in that cluster.     
-        Your tasks are:
-        - Summarize each cluster in 1–2 concise sentences.
-        - Propose a brief, tailored marketing strategy for each cluster.
-        - Use bullet points for clarity.
-        - Present the clusters in order of marketing importance, starting with the most valuable segment.
-        """
+    
         # st.session_state.clear()
         #response = st.session_state.gemini_model.generate_content(prompt.strip())
-        response = st.session_state.gemini_model.generate_content(prompt+str(rfm_json))
+        response = st.session_state.gemini_model.generate_content(prompt)
         # response = call_gemini_with_backoff(gemini_model, prompt.strip())
         # แสดงผลลัพธ์
         if response:  # มี response กลับมา
@@ -158,6 +148,7 @@ def run(df):
 
 
  
+
 
 
 
