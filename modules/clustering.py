@@ -187,12 +187,13 @@ def run(df):
     )
     
     # สำหรับ Streamlit
-    # st.plotly_chart(silhouette_plot_fig)
+    st.plotly_chart(silhouette_plot_fig)
 
 
 
 
  
+
 
 
 
