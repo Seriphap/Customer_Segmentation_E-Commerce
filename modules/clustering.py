@@ -142,7 +142,7 @@ def run(df):
     st.plotly_chart(silhouette_fig)
 
 
-    
+    st.write("### Silhouette Plot")
     X = formatted_df[['Recency', 'Frequency', 'Monetary']].values
     cluster_labels = formatted_df['Cluster'].values
     n_clusters = len(np.unique(cluster_labels))
@@ -193,6 +193,7 @@ def run(df):
 
 
  
+
 
 
 
