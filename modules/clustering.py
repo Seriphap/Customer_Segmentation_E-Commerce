@@ -4,6 +4,8 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 import plotly.graph_objects as go
 from sklearn.metrics import silhouette_score
+from sklearn.metrics import silhouette_samples
+import numpy as np
 import json
 import requests
 import google.generativeai as genai
@@ -140,9 +142,58 @@ def run(df):
     st.plotly_chart(silhouette_fig)
 
 
+    
+    X = formatted_df[['Recency', 'Frequency', 'Monetary']].values
+    cluster_labels = formatted_df['Cluster'].values
+    n_clusters = len(np.unique(cluster_labels))
+    
+    # คำนวณค่า silhouette
+    silhouette_avg = silhouette_score(X, cluster_labels)
+    sample_silhouette_values = silhouette_samples(X, cluster_labels)
+    
+    # สร้างกราฟด้วย Plotly
+    silhouette_plot_fig = go.Figure()
+    y_lower = 10
+    
+    for i in range(n_clusters):
+        ith_cluster_silhouette_values = sample_silhouette_values[cluster_labels == i]
+        ith_cluster_silhouette_values.sort()
+        size_cluster_i = ith_cluster_silhouette_values.shape[0]
+        y_upper = y_lower + size_cluster_i
+    
+        silhouette_plot_fig.add_trace(go.Bar(
+            x=ith_cluster_silhouette_values,
+            y=np.arange(y_lower, y_upper),
+            orientation='h',
+            name=f'Cluster {i}',
+            marker=dict(color=f'rgba({i*50 % 255}, {100 + i*30 % 155}, {200 - i*40 % 155}, 0.7)')
+        ))
+    
+        y_lower = y_upper + 10
+    
+    # เส้นค่าเฉลี่ย silhouette
+    silhouette_plot_fig.add_shape(type="line",
+                                  x0=silhouette_avg, y0=0,
+                                  x1=silhouette_avg, y1=y_lower,
+                                  line=dict(color="red", dash="dash"))
+    
+    silhouette_plot_fig.update_layout(
+        title="Silhouette Plot for RFM Clusters",
+        xaxis_title="Silhouette Coefficient Values",
+        yaxis_title="Cluster Samples",
+        height=600,
+        width=1000,
+        showlegend=True
+    )
+    
+    # สำหรับ Streamlit
+    # st.plotly_chart(silhouette_plot_fig)
+
+
 
 
  
+
 
 
 
