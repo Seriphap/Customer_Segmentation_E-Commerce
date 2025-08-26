@@ -64,7 +64,6 @@ def run(df):
         - Use bullet points for clarity.
         - Present the clusters in order, starting from Cluster 0 to the final cluster.
 
-
         Data:
         {rfm_json}
         """
@@ -148,6 +147,7 @@ def run(df):
 
 
  
+
 
 
 
