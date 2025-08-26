@@ -63,7 +63,7 @@ def run(df):
         - Present the clusters in order of marketing importance, starting with the most valuable segment.
         
         Data:
-        {str(rfm_json)}
+        {rfm_json}
         """
     
         # st.session_state.clear()
@@ -147,6 +147,7 @@ def run(df):
 
 
  
+
 
 
 
