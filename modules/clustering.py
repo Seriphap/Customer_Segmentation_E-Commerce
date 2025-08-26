@@ -68,7 +68,7 @@ def run(df):
     
         # st.session_state.clear()
         #response = st.session_state.gemini_model.generate_content(prompt.strip())
-        response = st.session_state.gemini_model.generate_content(prompt)
+        response = st.session_state.gemini_model.generate_content(prompt.strip())
         # response = call_gemini_with_backoff(gemini_model, prompt.strip())
         # แสดงผลลัพธ์
         if response:  # มี response กลับมา
@@ -148,6 +148,7 @@ def run(df):
 
 
  
+
 
 
 
