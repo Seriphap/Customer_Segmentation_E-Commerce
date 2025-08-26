@@ -67,9 +67,8 @@ def run(df):
         """
     
         # st.session_state.clear()
-        #response = st.session_state.gemini_model.generate_content(prompt.strip())
-        response = st.session_state.gemini_model.generate_content(prompt.strip())
-        # response = call_gemini_with_backoff(gemini_model, prompt.strip())
+        # response = gemini_model.generate_content(prompt.strip())
+        response = call_gemini_with_backoff(gemini_model, prompt.strip())
         # แสดงผลลัพธ์
         if response:  # มี response กลับมา
             st.subheader("🤖 Gemini Analysis of Clusters")
@@ -148,6 +147,7 @@ def run(df):
 
 
  
+
 
 
 
