@@ -127,27 +127,6 @@ def run(df):
                 finally:
                     st.session_state["gemini_in_progress"] = False
 
-    # show counters and event log in the UI for debugging
-    st.write(
-        f"User clicks: {st.session_state['gemini_user_clicks']}, "
-        f"API attempts (including retries): {st.session_state['gemini_api_attempts']}"
-    )
-
-    with st.expander("Show Gemini event log (most recent first)"):
-        recent = list(reversed(st.session_state["gemini_event_log"][-50:]))
-        for entry in recent:
-            ts = entry.get("timestamp", "")
-            evt = entry.get("event", "")
-            attempt = entry.get("attempt", "")
-            msg = f"{ts} | {evt} | attempt={attempt}"
-            if "error" in entry:
-                msg += f" | error={entry.get('error')}"
-            if "extracted_snippet" in entry:
-                msg += f" | extracted={entry.get('extracted_snippet')}"
-            if "sleep_seconds" in entry:
-                msg += f" | sleep={entry.get('sleep_seconds')}"
-            st.text(msg)
-
     #------------------------------------------------------------
     
     st.session_state['rfm'] = rfm
