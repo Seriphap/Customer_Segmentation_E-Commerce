@@ -94,29 +94,23 @@ def run(df):
                     gemini_model = genai.GenerativeModel("gemini-2.5-pro")
 
                     prompt = f"""
-You are a marketing analyst. The dataset summarizes customer segments derived from a K-Means clustering model based on RFM (Recency, Frequency, Monetary) metrics.
-Each row represents a customer cluster, showing the average values for Recency, Frequency, and Monetary, along with the total number of customers in that cluster.
-
-Your tasks are:
-- Summarize each cluster in 1–2 concise sentences.
-- Propose a brief, tailored marketing strategy for each cluster.
-- Use bullet points for clarity.
-- Present the clusters in order of marketing importance, starting with the most valuable segment.
-
-Data:
-{rfm_json}
-"""
-
+                    You are a marketing analyst. The dataset summarizes customer segments derived from a K-Means clustering model based on RFM (Recency, Frequency, Monetary) metrics.
+                    Each row represents a customer cluster, showing the average values for Recency, Frequency, and Monetary, along with the total number of customers in that cluster.
+               
+                    Your tasks are:
+                    - Summarize each cluster in 1–2 concise sentences.
+                    - Propose a brief, tailored marketing strategy for each cluster.
+                    - Use bullet points for clarity.
+                    - Present the clusters in order of marketing importance, starting with the most valuable segment.
+                            
+                    Data:
+                    {rfm_json}
+                    """
                     # call the helper which logs events and increments attempt counts
                     try:
                         analysis_text = call_gemini_with_backoff(
-                            gemini_model,
-                            prompt.strip(),
-                            max_retries=3,
-                            base=2,
-                            max_sleep=30,
-                            increment_attempt_cb=_increment_attempt,
-                            log_event_cb=_log_event,
+                            gemini_model,prompt.strip(),max_retries=3,base=2,max_sleep=30,
+                            increment_attempt_cb=_increment_attempt,log_event_cb=_log_event,
                         )
                     except Exception as e:
                         _log_event({"timestamp": pd.Timestamp.utcnow().isoformat() + "Z", "event": "final_error", "error": repr(e)})
