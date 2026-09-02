@@ -136,7 +136,9 @@ def run(df):
     # ==================================================
     # Correlation Heatmap
     # ==================================================
-
+    st.write(df_encoded.dtypes)
+    st.write(corr_matrix.shape)
+    st.write(corr_matrix.head())
     st.write("### 🔍 Correlation Heatmap")
 
     df_encoded = df.copy()
