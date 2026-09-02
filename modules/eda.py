@@ -136,12 +136,21 @@ def run(df):
     # ==================================================
     # Correlation Heatmap
     # ==================================================
-    st.write(corr_matrix.shape)
-    st.write(corr_matrix.head())
+
     st.write("### 🔍 Correlation Heatmap")
 
     df_encoded = df.copy()
+    
+    st.write("All dtypes")
     st.write(df_encoded.dtypes)
+
+    numeric_df = df_encoded.select_dtypes(include=["number", "bool"])
+
+    st.write("Numeric columns:")
+    st.write(numeric_df.columns.tolist())
+
+    st.write("Shape:")
+    st.write(numeric_df.shape)
 
     for column in df_encoded.columns:
 
