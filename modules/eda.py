@@ -54,7 +54,7 @@ def run(df):
             df_encoded[column] = le.fit_transform(df_encoded[column])
             label_encoders[column] = le
 
-    corr_matrix = df_encoded.corr().round(2)
+    corr_matrix = df_encoded.corr(numeric_only=True).round(2)
     z = corr_matrix.values
     x = corr_matrix.columns.tolist()
     y = corr_matrix.index.tolist()
